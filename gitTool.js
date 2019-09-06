@@ -32,10 +32,12 @@
                 var me = this;
                 exec('git ls-remote ' + gitUrl + ' ', (err, stdout, stderr) => {
                     if (err) {
-                      return (typeof cbk !== 'function') ? '' : cbk({
-                        status : 'failure',
-                        errorMessage : err.message
-                      });
+			var errType = new RegExp('authentication failed', 'i').test(err.message) ? 'authentication' : null
+			return (typeof cbk !== 'function') ? '' : cbk({
+				status : 'failure',
+				errType : errType,
+				errorMessage : err.message
+			});
                     }
                     var l = stdout.split("\n").filter(function(item) {
                         var line = item.split('refs/heads/');
