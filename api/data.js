@@ -1,1 +1,1 @@
-TAO.res.send('data.js');
+TAO.res.send(new Date().toString());
