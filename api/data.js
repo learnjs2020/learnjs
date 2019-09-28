@@ -1,1 +1,1 @@
-TAO.res.send(new Date().toString());
+TAO.res.send(TAO.env);
